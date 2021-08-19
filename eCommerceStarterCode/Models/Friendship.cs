@@ -8,6 +8,7 @@ namespace eCommerceStarterCode.Models
 {
     public class Friendship
     {
+        public int FriendshipId { get; set; }
         [ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }

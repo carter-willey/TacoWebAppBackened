@@ -8,6 +8,7 @@ namespace eCommerceStarterCode.Models
 {
     public class Reply
     {
+        public int ReplyId { get; set; }
         [ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }

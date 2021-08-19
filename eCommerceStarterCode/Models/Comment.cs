@@ -8,6 +8,7 @@ namespace eCommerceStarterCode.Models
 {
     public class Comment
     {
+        public int CommentId { get; set; }
         [ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }

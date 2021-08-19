@@ -12,6 +12,13 @@ namespace eCommerceStarterCode.Data
         {
 
         }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Reply> Replies { get; set; }
+        public DbSet<Shop> Shops { get; set; }
+        public DbSet<ShopHour> ShopHours { get; set; }
+        public DbSet<Taco> Tacos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
