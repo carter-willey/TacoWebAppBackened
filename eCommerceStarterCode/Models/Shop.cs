@@ -14,6 +14,10 @@ namespace eCommerceStarterCode.Models
         public User User { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        [Column(TypeName = "decimal(11,8)")]
+        public decimal Lng { get; set; }
+        [Column(TypeName = "decimal(10,8)")]
+        public decimal Lat { get; set; }
         public string Image { get; set; }
     }
 }
