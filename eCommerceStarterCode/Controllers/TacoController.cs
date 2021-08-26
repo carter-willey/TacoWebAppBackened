@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tacos")]
     [ApiController]
     public class TacoController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
         
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var tacosFromShop = _context.Tacos.Where(taco => taco.ShopId == id);

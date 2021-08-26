@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210823182422_userregistration")]
-    partial class userregistration
+    [Migration("20210824190845_ShopHours")]
+    partial class ShopHours
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "725f9245-24f3-439b-b1a1-f2dadafe3b4f",
-                            ConcurrencyStamp = "af746fc8-b402-48d2-811f-2c93e3fd87b6",
+                            Id = "cd797835-f6d0-4f1d-a843-894cb527969e",
+                            ConcurrencyStamp = "93b91f7a-cd91-4f71-aad4-1b76cb71ecf7",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "d47811d2-e5df-4d4a-b2b6-6fcb7973d358",
-                            ConcurrencyStamp = "b13a3cef-5cfd-4ba4-9a96-617dc303645b",
+                            Id = "41544d1a-d10e-4283-af68-c0ba1dc3e49a",
+                            ConcurrencyStamp = "23b75a5f-84c3-41e0-9895-ca804af79872",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -290,9 +290,6 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OwnerId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -310,16 +307,49 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Close")
+                    b.Property<int>("FriClose")
                         .HasColumnType("int");
 
-                    b.Property<int>("Day")
+                    b.Property<int>("FriOpen")
                         .HasColumnType("int");
 
-                    b.Property<int>("Open")
+                    b.Property<int>("MonClose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MonOpen")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SatClose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SatOpen")
                         .HasColumnType("int");
 
                     b.Property<int>("ShopId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SunClose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SunOpen")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThursClose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThursOpen")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TuesClose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TuesOpen")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WedClose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WedOpen")
                         .HasColumnType("int");
 
                     b.HasKey("ShopHourId");
@@ -382,6 +412,9 @@ namespace eCommerceStarterCode.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasLogged")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");

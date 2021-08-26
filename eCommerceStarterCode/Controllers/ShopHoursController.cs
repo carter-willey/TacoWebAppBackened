@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/shophours")]
     [ApiController]
     public class ShopHoursController : ControllerBase
     {
@@ -42,8 +42,6 @@ namespace eCommerceStarterCode.Controllers
         public IActionResult Put(int id, [FromBody] ShopHour value)
         {
             var shopHour = _context.ShopHours.FirstOrDefault(fr => fr.ShopHourId == id);
-            shopHour.Open = value.Open;
-            shopHour.Close = value.Close;
             _context.SaveChanges();
             return Ok(shopHour);
 

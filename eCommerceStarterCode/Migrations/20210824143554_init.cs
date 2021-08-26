@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class init2 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace eCommerceStarterCode.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsOwner = table.Column<bool>(type: "bit", nullable: false),
+                    HasLogged = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -189,7 +190,6 @@ namespace eCommerceStarterCode.Migrations
                 {
                     ShopId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -338,12 +338,12 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f6ba6afe-7ece-4ce4-9812-cc7e03e210e2", "47f19147-469d-4fd8-9b64-e22d4fb3c99f", "User", "USER" });
+                values: new object[] { "8ee6f339-8f97-4c02-96ff-03a1f7d75e05", "fea09c23-4bea-4653-ab58-8427429347de", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "b19c46e4-2e71-4f40-8598-fa7c4398565d", "aef1e33e-55b6-4023-b76a-b134912340ef", "Admin", "ADMIN" });
+                values: new object[] { "53466a79-b366-486b-8e04-735e2dad25b4", "839878c4-6626-42b9-b69b-f7c5d37dc3c7", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

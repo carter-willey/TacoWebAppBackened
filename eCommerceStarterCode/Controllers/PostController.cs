@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/posts")]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet, Authorize]
         public IActionResult Get()
         {
-            var posts = _context.Posts;
+            var posts = _context.Posts.Include(post => post.User).Include(post => post.Taco).Include(post => post.Taco.Shop);
             return Ok(posts);
         }
 
@@ -33,7 +33,7 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet("{id}"), Authorize]
         public IActionResult Get(int id)
         {
-            var specificPost = _context.Posts.FirstOrDefault(post => post.PostId == id);
+            var specificPost = _context.Posts.Include(post => post.User).Include(post => post.Taco).FirstOrDefault(post => post.PostId == id);
             return Ok(specificPost);
         }
 

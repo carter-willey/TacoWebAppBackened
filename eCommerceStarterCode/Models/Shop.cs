@@ -9,8 +9,8 @@ namespace eCommerceStarterCode.Models
     public class Shop
     {
         public int ShopId { get; set; }
-        [ForeignKey("Owner")]
-        public string OwnerId { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
         public User User { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

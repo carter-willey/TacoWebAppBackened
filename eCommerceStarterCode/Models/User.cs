@@ -8,5 +8,7 @@ namespace eCommerceStarterCode.Models
         public string LastName { get; set; }
         public string Image { get; set; }
         public bool IsOwner { get; set; }
+        public bool HasLogged { get; set; }
+
     }
 }

@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/examples")]
+    [Route("api/users")]
     [ApiController]
-    public class ExamplesController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public ExamplesController(ApplicationDbContext context)
+        public UserController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace eCommerceStarterCode.Controllers
         public IActionResult GetCurrentUser()
         {
             var userId = User.FindFirstValue("id");
-            var user = _context.Users.Find(userId);
+            var user = _context.Users.FirstOrDefault(us => us.Id == userId);
             if(user == null)
             {
                 return NotFound();

@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210819202832_decimal")]
-    partial class @decimal
+    [Migration("20210824143554_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a678d6b0-99f1-4fd7-ae11-93bc0f51da9e",
-                            ConcurrencyStamp = "91064958-464f-4abf-aa5f-667e140b347f",
+                            Id = "8ee6f339-8f97-4c02-96ff-03a1f7d75e05",
+                            ConcurrencyStamp = "fea09c23-4bea-4653-ab58-8427429347de",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "4780f2b4-bb6b-47d9-9cdc-d7547c831ea2",
-                            ConcurrencyStamp = "a0704c0c-2cf8-4ced-9c3d-25906f63a564",
+                            Id = "53466a79-b366-486b-8e04-735e2dad25b4",
+                            ConcurrencyStamp = "839878c4-6626-42b9-b69b-f7c5d37dc3c7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -290,9 +290,6 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OwnerId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -382,6 +379,9 @@ namespace eCommerceStarterCode.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasLogged")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
