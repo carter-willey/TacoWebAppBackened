@@ -19,7 +19,15 @@ namespace eCommerceStarterCode.Controllers
         {
             _context = context;
         }
-       
+        [HttpGet, Authorize]
+        public IActionResult Get()
+        {
+            var ShopHours = _context.ShopHours;
+            
+            return Ok(ShopHours);
+
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -42,6 +50,20 @@ namespace eCommerceStarterCode.Controllers
         public IActionResult Put(int id, [FromBody] ShopHour value)
         {
             var shopHour = _context.ShopHours.FirstOrDefault(fr => fr.ShopHourId == id);
+            shopHour.MonOpen = value.MonOpen;
+            shopHour.MonClose = value.MonClose;
+            shopHour.TuesOpen = value.TuesOpen;
+            shopHour.TuesClose = value.TuesClose;
+            shopHour.WedOpen = value.WedOpen;
+            shopHour.WedClose = value.WedClose;
+            shopHour.ThursOpen = value.ThursOpen;
+            shopHour.ThursClose = value.ThursClose;
+            shopHour.FriOpen = value.FriOpen;
+            shopHour.FriClose = value.FriClose;
+            shopHour.SatOpen = value.SatOpen;
+            shopHour.SatClose = value.SatClose;
+            shopHour.SunOpen = value.SunOpen;
+            shopHour.SunClose = value.SunClose;
             _context.SaveChanges();
             return Ok(shopHour);
 

@@ -39,6 +39,11 @@ namespace eCommerceStarterCode.Controllers
                 }
                 return BadRequest(ModelState);
             }
+            if (user.IsOwner)
+            {
+                await _userManager.AddToRoleAsync(user, "ADMIN");
+                return StatusCode(201, user);
+            }
             await _userManager.AddToRoleAsync(user, "USER");
             return StatusCode(201, user);
         }

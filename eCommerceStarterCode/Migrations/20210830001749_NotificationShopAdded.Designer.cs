@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210826191944_lnglat")]
-    partial class lnglat
+    [Migration("20210830001749_NotificationShopAdded")]
+    partial class NotificationShopAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "389e2ab2-b77a-4a97-a05c-04d2f54746ed",
-                            ConcurrencyStamp = "edc01cb5-2184-4455-b026-df61f62b284a",
+                            Id = "0ec53391-8d51-48d0-91b9-9a5beb31c054",
+                            ConcurrencyStamp = "fbe3f372-6386-4418-b820-0f1924bd49d7",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "f4d1a45f-d728-40e3-86ff-a4057b44f59f",
-                            ConcurrencyStamp = "d25caffa-f877-4a3d-9268-74819c2ca749",
+                            Id = "a1fd8a55-6c17-4ceb-9d9a-880e93d40363",
+                            ConcurrencyStamp = "0e7efd23-0a4b-40af-9b7f-82e1b1596478",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -216,6 +216,31 @@ namespace eCommerceStarterCode.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Friendships");
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ShopId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("NotificationId");
+
+                    b.HasIndex("ShopId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.Post", b =>
@@ -556,6 +581,23 @@ namespace eCommerceStarterCode.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Friend");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.Notification", b =>
+                {
+                    b.HasOne("eCommerceStarterCode.Models.Shop", "Shop")
+                        .WithMany()
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceStarterCode.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Shop");
 
                     b.Navigation("User");
                 });

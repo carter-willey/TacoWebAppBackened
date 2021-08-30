@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/friendship")]
     [ApiController]
     public class FriendshipController : ControllerBase
     {
@@ -22,10 +22,10 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
         // GET: api/<ValuesController>
-        [HttpGet, Authorize]
+        [HttpGet]
         public IActionResult Get()
         {
-            var friends = _context.Friendships.Where(fr => fr.UserId == User.FindFirstValue("id"));
+            var friends = _context.Friendships.Include(fr => fr.Friend).Where(fr => fr.UserId == User.FindFirstValue("id") || fr.FriendId == User.FindFirstValue("id"));
             return Ok(friends);
         }
 

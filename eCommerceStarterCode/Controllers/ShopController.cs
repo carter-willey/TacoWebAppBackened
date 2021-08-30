@@ -35,6 +35,12 @@ namespace eCommerceStarterCode.Controllers
             var specificShop = _context.Shops.FirstOrDefault(shop => shop.ShopId == id);
             return Ok(specificShop);
         }
+        [HttpGet("user"), Authorize]
+        public IActionResult Get([FromBody] Shop value)
+        {
+            var specificShop = _context.Shops.FirstOrDefault(shop => shop.UserId == value.UserId);
+            return Ok(specificShop);
+        }
 
         // POST api/<ReviewsController>
         [HttpPost, Authorize]
@@ -43,6 +49,16 @@ namespace eCommerceStarterCode.Controllers
             _context.Shops.Add(value);
             _context.SaveChanges();
             return Ok(value);
+        }
+        // PUT api/<ValuesController>/5
+        [HttpPut("{id}"), Authorize]
+        public IActionResult Put(int id, [FromBody] Shop value)
+        {
+            var shop = _context.Shops.FirstOrDefault(fr => fr.ShopId == id);
+            shop.Address = value.Address;
+            _context.SaveChanges();
+            return Ok(shop);
+
         }
 
     }

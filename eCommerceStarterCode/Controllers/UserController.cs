@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/users")]
+    [Route("api/examples")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -26,6 +26,17 @@ namespace eCommerceStarterCode.Controllers
             var userId = User.FindFirstValue("id");
             var user = _context.Users.FirstOrDefault(us => us.Id == userId);
             if(user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+        [HttpGet("{userId}"), Authorize]
+        public IActionResult Get(string userId)
+        {
+           
+            var user = _context.Users.FirstOrDefault(us => us.Id == userId);
+            if (user == null)
             {
                 return NotFound();
             }

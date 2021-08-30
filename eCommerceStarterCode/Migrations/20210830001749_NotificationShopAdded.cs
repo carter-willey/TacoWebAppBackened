@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class init : Migration
+    public partial class NotificationShopAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,6 +193,8 @@ namespace eCommerceStarterCode.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lng = table.Column<decimal>(type: "decimal(11,8)", nullable: false),
+                    Lat = table.Column<decimal>(type: "decimal(10,8)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -207,15 +209,53 @@ namespace eCommerceStarterCode.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    NotificationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ShopId = table.Column<int>(type: "int", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.NotificationId);
+                    table.ForeignKey(
+                        name: "FK_Notifications_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Shops_ShopId",
+                        column: x => x.ShopId,
+                        principalTable: "Shops",
+                        principalColumn: "ShopId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ShopHours",
                 columns: table => new
                 {
                     ShopHourId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ShopId = table.Column<int>(type: "int", nullable: false),
-                    Day = table.Column<int>(type: "int", nullable: false),
-                    Open = table.Column<int>(type: "int", nullable: false),
-                    Close = table.Column<int>(type: "int", nullable: false)
+                    MonOpen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MonClose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TuesOpen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TuesClose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WedOpen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WedClose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThursOpen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThursClose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FriOpen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FriClose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SatOpen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SatClose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SunOpen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SunClose = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -338,12 +378,12 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8ee6f339-8f97-4c02-96ff-03a1f7d75e05", "fea09c23-4bea-4653-ab58-8427429347de", "User", "USER" });
+                values: new object[] { "0ec53391-8d51-48d0-91b9-9a5beb31c054", "fbe3f372-6386-4418-b820-0f1924bd49d7", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "53466a79-b366-486b-8e04-735e2dad25b4", "839878c4-6626-42b9-b69b-f7c5d37dc3c7", "Admin", "ADMIN" });
+                values: new object[] { "a1fd8a55-6c17-4ceb-9d9a-880e93d40363", "0e7efd23-0a4b-40af-9b7f-82e1b1596478", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -405,6 +445,16 @@ namespace eCommerceStarterCode.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notifications_ShopId",
+                table: "Notifications",
+                column: "ShopId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_UserId",
+                table: "Notifications",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_TacoId",
                 table: "Posts",
                 column: "TacoId");
@@ -459,6 +509,9 @@ namespace eCommerceStarterCode.Migrations
 
             migrationBuilder.DropTable(
                 name: "Friendships");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Replies");

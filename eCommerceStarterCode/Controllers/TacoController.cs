@@ -27,6 +27,13 @@ namespace eCommerceStarterCode.Controllers
             return Ok(tacosFromShop);
 
         }
+        [HttpGet("user/{id}"), Authorize]
+        public IActionResult Get(string id)
+        {
+            var tacosFromShop = _context.Tacos.Include(taco => taco.Shop).Where(taco => taco.Shop.UserId == id);
+            return Ok(tacosFromShop);
+
+        }
         // POST api/<ReviewsController>
         [HttpPost, Authorize]
         public IActionResult Post([FromBody] Taco value)

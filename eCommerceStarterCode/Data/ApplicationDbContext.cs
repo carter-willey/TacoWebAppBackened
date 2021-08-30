@@ -19,6 +19,7 @@ namespace eCommerceStarterCode.Data
         public DbSet<Shop> Shops { get; set; }
         public DbSet<ShopHour> ShopHours { get; set; }
         public DbSet<Taco> Tacos { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
